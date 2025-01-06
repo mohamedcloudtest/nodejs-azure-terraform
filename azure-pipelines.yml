@@ -2,10 +2,10 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'MySelfHostedPool'
 
 variables:
-  azureSubscription: '70b03d67-56bd-4483-8274-f4966fb4bdc5'
+  azureSubscription: 'SC1'  # Replace with the actual name of your service connection
   appName: 'example-app-service-mo'
   resourceGroup: 'rg-example'
   location: 'West Europe'
@@ -15,6 +15,7 @@ steps:
   inputs:
     versionSpec: '14.x'
     checkLatest: true
+  displayName: 'Use Node.js version 14.x'
 
 - script: |
     npm install
@@ -23,11 +24,9 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: $(Azure subscription 1)
+    azureSubscription: $(azureSubscription)
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      az webapp up --name $(example-app-service-mo) --resource-group $(rg-example) --location $(West Europe)
+      az webapp up --name $(appName) --resource-group $(resourceGroup) --location $(location) --runtime "NODE|14-lts"
   displayName: 'Deploy to Azure Web App'
-
-
