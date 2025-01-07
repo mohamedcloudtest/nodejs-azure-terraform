@@ -8,7 +8,7 @@ variables:
   azureSubscription: 'SC1'  # Replace with the actual name of your service connection
   appName: 'example-app-service-mo'
   resourceGroup: 'rg-example'
-  location: 'West Europe'
+  location: 'westeurope'  # Corrected region format
 
 steps:
 - task: NodeTool@0
@@ -21,7 +21,6 @@ steps:
     npm install
     npm test || echo "Ignoring test failures for now"
   displayName: 'Install and test the application'
-
 
 - task: AzureCLI@2
   inputs:
