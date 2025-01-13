@@ -13,9 +13,9 @@ variables:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '16.x'
+    versionSpec: '18.x'
     checkLatest: true
-  displayName: 'Use Node.js version 16.x'
+  displayName: 'Use Node.js version 18.x'
 
 - script: |
     npm install
@@ -28,5 +28,5 @@ steps:
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
-      az webapp up --name $(appName) --resource-group $(resourceGroup) --location $(location) --runtime "NODE|16-lts"
+      az webapp up --name $(appName) --resource-group $(resourceGroup) --location $(location) --runtime "NODE|18-lts"
   displayName: 'Deploy to Azure Web App'
